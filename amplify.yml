@@ -1,0 +1,22 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+    build:
+      commands:
+        - echo "REACT_APP_BASE_URL=${BASE_URL}" >> .env
+        - echo "REACT_APP_USER_POOL_ID=${USER_POOL_ID}" >> .env
+        - echo "REACT_APP_CLIENT_ID=${CLIENT_ID}" >> .env
+        - echo "AMPLIFY_USERPOOL_ID=${AMPLIFY_USERPOOL_ID}" >> .env
+        - echo "AMPLIFY_WEBCLIENT_ID=${AMPLIFY_WEBCLIENT_ID}" >> .env
+        - echo "REACT_APP_SUBSCRIPTION_LEVEL=${SUBSCRIPTION_LEVEL}" >> .env
+        - yarn run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
